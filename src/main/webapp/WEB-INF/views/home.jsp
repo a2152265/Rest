@@ -210,7 +210,7 @@ body {
 	<div>
 		<ul class="nav2">
   <li>
-    <a href=".\insert.jsp">
+    <a href="insert">
       新增
       
     </a>

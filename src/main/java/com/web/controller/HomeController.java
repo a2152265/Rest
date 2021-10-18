@@ -10,7 +10,7 @@ public class HomeController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@GetMapping("/")
+	@GetMapping({"/","/home"})
 	public String index() {
 		System.out.println("進入首頁");
 		return "home";

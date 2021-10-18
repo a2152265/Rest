@@ -100,6 +100,22 @@ a {
     align-items: center; 
         }
 </style>
+<script type="text/javascript">
+   window.onload = function(){
+       var form = document.getElementById('form1');
+       var insert = document.getElementById('insert');
+
+       insert.addEventListener('click', function(e){
+           e.preventDefault();
+           var formData = new FormData(form);
+           var xh = new XMLHttpRequest();
+           xh.open('post','insert.controller');
+           xh.send(formData);
+           setTimeout("location.href='insertsuccess'",0)
+       
+       });
+   }
+</script>
 </head>
 <body>
 
@@ -115,35 +131,36 @@ a {
 	<br>
 	<br>
 	<div>
-		<form action="./HibernateServletAction.do" method="post">
+		<form  id="form1">
 
 			<table rules="all">
 				<tr>
 					<td>請輸入書名</td>
-					<td><input type="text" class="inputClass" name="bookname">
+					<td><input type="text" class="inputClass" name="bookname" id ="bookname" >
 						<br /></td>
 				</tr>
 				<tr>
 					<td>請輸入作者:</td>
 					<td><label for="proName"></label> <input type="text"
-						class="inputClass" name="author"><br /></td>
+						class="inputClass" name="author" id="author"><br /></td>
 				</tr>
 
 
 				<tr>
 					<td>請輸入價錢:</td>
-					<td><input type="text" class="inputClass" name="price"><br /></td>
+					<td><input type="text" class="inputClass" name="price" id="price"><br /></td>
 				</tr>
 			</table>
 			<div class="wrap">
-				<button type="submit" name="insert" class="button">確認送出</button>
+				<button type="submit" name="insert" id="insert" class="button">確認送出</button>
 
 			</div>
 
 		</form>
 
 			<div class=div>
-    			<a href="home.jsp"><button class="button" >回首頁</button></a>
+			
+    			<a href="home"><button class="button" >回首頁</button></a>
     		</div>
 
 	</div>
