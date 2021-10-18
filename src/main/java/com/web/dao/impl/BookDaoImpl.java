@@ -2,6 +2,8 @@ package com.web.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.dao.BookDao;
 import com.web.model.Book;
+
 
 
 
@@ -118,6 +121,44 @@ public class BookDaoImpl implements BookDao {
 		 }
 
 		return query.list();
+	}
+
+	@Override
+	public boolean checkName(String name) {
+		
+		Session session = factory.getCurrentSession();
+		System.out.println("name");
+		
+		Book bBean = new Book();
+		bBean.setBookname(name);
+		
+		
+		
+		String hql = "select bookname from Book b where b.bookname=:bookname";
+		
+		try {
+			Query query = session.createQuery(hql);
+			query.setParameter("bookname", name);
+			System.out.println("createQuery 結束");
+			query.getSingleResult();
+			System.out.println("Book  resultBean.getBookname()"+query.getSingleResult());
+			
+			if(query.getSingleResult()!=null) {
+				return true;
+			}
+			
+		} catch (NoResultException e) {
+			System.out.println("沒帳號拉");
+			return false;		
+		}catch (NonUniqueResultException  e) {
+			System.out.println("多筆帳號拉");
+			return false;		
+		}
+		
+		
+		
+		
+		return false;		
 	}
 
 }

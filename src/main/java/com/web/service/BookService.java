@@ -13,5 +13,6 @@ public interface BookService {
     public Book update(Book book);
     public boolean deleteById(int bookid);
     public List<Book> deleteByName(String name);
+    public boolean checkName(String name);
 	
 }

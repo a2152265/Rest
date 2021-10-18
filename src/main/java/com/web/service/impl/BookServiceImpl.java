@@ -62,6 +62,12 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return bookdao.deleteByName(name);
 	}
+
+	@Override
+	public boolean checkName(String name) {
+		// TODO Auto-generated method stub
+		return bookdao.checkName(name);
+	}
 	
 
 }
