@@ -7,7 +7,7 @@ import com.web.model.Book;
 
 public interface BookService {
 
-	public Book insert(Book boook);
+	public Book insert(Book book);
 	public List<Book> selectLikeName(String name);
 	public List<Book> selectAll();
     public Book update(Book book);

@@ -23,6 +23,14 @@ package com.web.model;
 		@Column(name = "PRICE")
 		private Integer price;
 
+		public Book( String bookname, String author, Integer price) {
+		
+
+			this.bookname = bookname;
+			this.author = author;
+			this.price = price;
+		}
+
 		public Integer getId() {
 			return id;
 		}

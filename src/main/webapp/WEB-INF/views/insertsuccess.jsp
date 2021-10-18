@@ -23,7 +23,7 @@
                 timer: 2000
                 })
 
-                setTimeout("location.href='home.jsp'",2000)
+                setTimeout("location.href='home'",2000)
 
     </script>
 

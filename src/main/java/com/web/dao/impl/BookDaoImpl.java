@@ -33,11 +33,11 @@ public class BookDaoImpl implements BookDao {
 		Session session = factory.getCurrentSession();
 //		System.out.println("book = "+book.getBookname());
 
-		Book bBean = new Book();
-		bBean.setBookname(book.getBookname());
-		bBean.setAuthor(book.getAuthor());
-		bBean.setPrice(book.getPrice());
-		session.save(bBean);
+//		Book bBean = new Book();
+		book.setBookname(book.getBookname());
+		book.setAuthor(book.getAuthor());
+		book.setPrice(book.getPrice());
+		session.save(book);
 		
 		
 		return book;	
