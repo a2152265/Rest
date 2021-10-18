@@ -30,6 +30,10 @@ package com.web.model;
 			this.author = author;
 			this.price = price;
 		}
+		
+		public Book() {
+
+		}
 
 		public Integer getId() {
 			return id;
