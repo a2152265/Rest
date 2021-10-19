@@ -12,12 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.web.dao.BookDao;
 import com.web.model.Book;
 
-
-
-
-
-
-
 @Repository
 public class BookDaoImpl implements BookDao {
 	
@@ -45,17 +39,18 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-
 	public List<Book> selectAll() {
 		Session session = factory.getCurrentSession();
 		Query<Book> query = session.createQuery("from Book", Book.class);
 		return query.list();
+//		String hql ="FROM Book";
+//		 return session.createQuery(hql,Book.class)
+//				    .getResultList();
 	}
 
 	public Book selectById(int bookid) {
 		Session session = factory.getCurrentSession();
 		return session.get(Book.class, bookid);
-
 	}
 
 	@Override
@@ -71,7 +66,7 @@ public class BookDaoImpl implements BookDao {
 		Session session = factory.getCurrentSession();
 		String hql="update Book set bookname=:bname,author=:bauthor,price=:bprice where id=:bid";
 
-		Query query = session.createQuery(hql);
+		Query<?> query = session.createQuery(hql);
 		query.setParameter("bname", book.getBookname());
 		query.setParameter("bauthor", book.getAuthor());
 		query.setParameter("bprice", book.getPrice());
@@ -111,7 +106,7 @@ public class BookDaoImpl implements BookDao {
 		 System.out.println("id:" + book.getId());
 		 System.out.println("name:" + book.getBookname());
 		   //先用name查找出ID 再用ID刪
-			int bookId=book.getId();		
+//			int bookId=book.getId();		
 			 session.delete(book);
 			 System.out.println("刪除成功");
 		 

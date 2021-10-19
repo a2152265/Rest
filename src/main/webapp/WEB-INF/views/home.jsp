@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
@@ -221,12 +221,12 @@ body {
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href=".\select.jsp">
+        <a href="<c:url value='/findByBookname' />">
           書名查詢
         </a>
       </li>
       <li>
-        <a href=".\selectall.jsp">
+        <a href="<c:url value='/getAll' />">
           全部查詢
         </a>
       </li>
