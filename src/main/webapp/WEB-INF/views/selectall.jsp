@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.web.model.Book"%>
-<%@ page import="java.util.List"%>
-<%@ page import="org.hibernate.SessionFactory"%>
-
-<%@ page import="org.hibernate.Session"%>
-<%@ page import="com.web.dao.BookDao"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -211,66 +206,44 @@ table tbody input {
 	height: 25px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+			$.ajax({
+				url:'findAll',
+				type:'get',
+				contentType: "application/json; charset=utf-8",
+				success:function(data){
+					for(i=0;i<data.length;i++){
+						$('#row').append(
+								"<tr>"+
+								"<td>"+data[i].id+"</td>"+
+								"<td>"+data[i].bookname+"</td>"+
+								"<td>"+data[i].author+"</td>"+
+								"<td>"+data[i].price+"</td>"+
+								"</tr>"
+						)
+					};
+				},
+			});
+	});
+</script>
 </head>
 <body>
  <div class="leftSide">
   <h1 class="p">查詢商品</h1>
- 
-<!-- 	<form action="./HibernateServletAction.do" method="post"> -->
-<!-- 		<center>	 -->
-
-<!-- 			<button type="submit" name="selectALL">查詢全部</button> -->
-<!-- 		</center> -->
-
-<!-- 	</form> -->
-
-	
-	<%
-			Session factory = session.getSessionFactory();
-			BookDaoImpl bDao = new BookDaoImpl(factory.getCurrentSession());
-			List<Book> resultList = bDao.selectAll();
-			if (resultList != null) {
-		%>
-	<table border="1">
-		<th>編號</th>
-		<th>書名</th>
-		<th>作者</th>
-		<th>價錢</th>
-		<%
-		for (int i = 0; i < resultList.size(); i++) {
-			Book book = resultList.get(i);
-		%>
-		<tr>
-			<td>
-				<%
-				out.write("ID:" + book.getId());
-				%>
-			</td>
-			<td>
-				<%
-				out.write(book.getBookname());
-				%>
-			</td>
-			<td>
-				<%
-				out.write(book.getAuthor());
-				%>
-			</td>
-			<td>
-				<%
-				out.write("$" + book.getPrice() + "元<br>");
-				%>
-			</td>
-			<%
-			}
-			}
-			request.getSession(true).removeAttribute("resultList");
-			%>
-		</tr>
-	</table>
-
+</div>
+		<div class="container">
+			<table border=1>
+				<tr>
+					<th>編號</th><th>書名</th><th>作者</th><th>價錢</th>
+				</tr>
+				<tbody id="row">
+				</tbody>
+			</table>
+		</div>
 		<div class=div>
-    			<a href="home.jsp"><button class="button" >回首頁</button></a>
+    			<a href="<c:url value='/' />"><button class="button" >回首頁</button></a>
     		</div>
 	
 

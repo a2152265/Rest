@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="HibernateHW.model.Book"%>
-<%@ page import="java.util.List"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -225,64 +224,55 @@ table tbody input {
 	height: 25px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#send').click(function(){
+			$('#row').html('');
+			$.ajax({
+				url:'findAllByBookname',
+				type:'get',
+				contentType: "application/json; charset=utf-8",
+				data:{"bookname":$('#bookname').val()},
+				success:function(data){
+					for(i=0;i<data.length;i++){
+						$('#row').append(
+								"<tr>"+
+								"<td>"+data[i].id+"</td>"+
+								"<td>"+data[i].bookname+"</td>"+
+								"<td>"+data[i].author+"</td>"+
+								"<td>"+data[i].price+"</td>"+
+								"</tr>"
+						)
+					};
+				},
+			});
+		});
+	});
+</script>
 </head>
 <body>
  <div class="leftSide">
   <h1 class="p">查詢商品</h1>
  
-	<form action="./HibernateServletAction.do" method="post">
-		<center>
-			<label>書名關鍵字</label> <input type="text" name="bookname" class="input">
+<!-- 	<form method=get> -->
+		<div>
+			<label>書名關鍵字</label> 
+			<input id="bookname" type="text" name="bookname" class="input">
+			<button id="send" name="select">送出</button>
+		</div>
+<!-- 	</form> -->
+		<div class="container">
+			<table border=1>
+				<tr>
+					<th>編號</th><th>書名</th><th>作者</th><th>價錢</th>
+				</tr>
+				<tbody id="row">
+				</tbody>
+			</table>
+		</div>
+</div>
 
-			<button type="submit" name="select">送出</button>
-
-		</center>
-
-	</form>
-
-
-
-	<%
-	List<Book> selectLikeName = (List<Book>) request.getSession(true).getAttribute("resultBean");
-	if (selectLikeName != null) {
-	%>
-	<table border="1">
-		<th>編號</th>
-		<th>書名</th>
-		<th>作者</th>
-		<th>價錢</th>
-		<%
-		for (int i = 0; i < selectLikeName.size(); i++) {
-			Book book = selectLikeName.get(i);
-		%>
-		<tr>
-			<td>
-				<%
-				out.write("ID:" + book.getId());
-				%>
-			</td>
-			<td>
-				<%
-				out.write(book.getBookname());
-				%>
-			</td>
-			<td>
-				<%
-				out.write(book.getAuthor());
-				%>
-			</td>
-			<td>
-				<%
-				out.write("$" + book.getPrice() + "元<br>");
-				%>
-			</td>
-			<%
-			}
-			}
-			request.getSession(true).removeAttribute("resultBean");
-			%>
-		</tr>
-	</table>
-	<a href="home.jsp"><button class="button">回首頁</button></a>
+	<a href="<c:url value='/' />"><button class="button">回首頁</button></a>
 </body>
 </html>
