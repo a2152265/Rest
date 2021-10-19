@@ -93,6 +93,49 @@ input, textarea, select {
     	  align-items: center; 
         }
 </style>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(function(){
+       $("#send").click(function(){
+            var bookname = $("#book").val();  //抓到帳號的值
+
+            if($.trim(bookname)==''){
+                alert('Account is Empty');
+                return;
+            }
+
+            var params = {"bookname":''+ bookname};
+
+            $.ajax({
+                type:'post',
+                url:'userscheck.controller',
+                contentType:'application/json',   //送的資料格式contentType ->json
+                data: JSON.stringify(params),     //stringify ->轉成字串
+                success: function(data){
+                    console.log("Success:" + data);    //成功的話 回傳的data
+                    if(data=='Y'){
+                       $("#result").load('account  exists');
+                    }
+
+                    if(data=='N'){
+                        $("#result").html('account does not exist');
+                    }
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            });
+       });
+   });
+</script>
+
+
+
+
 </head>
 <body>
 
@@ -109,7 +152,7 @@ input, textarea, select {
    <table rules="all">
        <h4 style="font-size: 20px;">輸入書名刪除資料</h4>
     <tr>
-     <td>請輸入書名 :</td>
+
      <td>
      	<form:input id="bookname" path="bookname" type='text'
 							class='inputClass' />
@@ -130,6 +173,17 @@ input, textarea, select {
 	
 
   </form:form>
+  
+  <div>
+  	Account:<input id="book" type="text" name="book"/>
+      <label id="result" name="result"></label>
+      <button id="send">檢查帳號send</button>
+  </div>
+  
+  
+  
+  
+  
   
   
   <div class=div>
