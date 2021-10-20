@@ -118,11 +118,11 @@ input, textarea, select {
                 success: function(data){
                     console.log("Success:" + data);    //成功的話 回傳的data
                     if(data=='Y'){
-                       $("#result").load('account  exists');
+                       $("#result").html('帳號存在 並已刪除');
                     }
 
                     if(data=='N'){
-                        $("#result").html('account does not exist');
+                        $("#result").html('帳號不存在');
                     }
                 },
                 error: function(e){
@@ -177,7 +177,7 @@ input, textarea, select {
   <div>
   	Account:<input id="book" type="text" name="book"/>
       <label id="result" name="result"></label>
-      <button id="send">檢查帳號send</button>
+      <button id="send">檢查帳號send 如果存在即刪除</button>
   </div>
   
   

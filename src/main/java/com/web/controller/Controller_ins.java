@@ -18,16 +18,7 @@ import com.web.service.MemberService;
 public class Controller_ins {
 
 	BookService bookservice;
-//	
-//	private ProfilesDao pDao;
-//	public Controller_ins() {
-//		@PostMapping(path = "/profiles") @ResponseBody
-//		public String processProfilesInsertAction(@RequestParam("userName") String userName, @RequestParam("userAddress") String userAddress,
-//				                                 @RequestParam("userPhone") String userPhone) {
-//			Profiles profiles = new Profiles(userName, userAddress, userPhone);
-//			pDao.insert(profiles);
-//			return "Insert OK";
-//		}
+
 	@Autowired
 	public Controller_ins( BookService bookservice) {
 		this.bookservice = bookservice;

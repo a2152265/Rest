@@ -68,8 +68,10 @@ public class Controller_de {
 		System.out.println("-@RequestBody-----------book.getBookname()------->"+book.getBookname());
 		boolean status = bookservice.checkName(book.getBookname());
 		System.out.println(" bookservice.checkName做完了---->"+status);
-		if(status) {
-			System.out.println("成功check bookname 並刪除");
+		if(status==true) {
+			
+			bookservice.deleteByName(book.getBookname());
+			System.out.println("成功check bookname 並刪除xxxxxxxxxxxxxxxxxxxxxxxxxx");
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}
 		
