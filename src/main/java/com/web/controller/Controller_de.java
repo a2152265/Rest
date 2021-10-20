@@ -98,7 +98,7 @@ public class Controller_de {
 		System.out.println("process deleteby id -----getBookname---->"+book.getBookname());
 		System.out.println("process deleteby id -----getId---->"+book.getId());
 
-		memberService.deleteById(book.getId());
+		bookservice.deleteById(book.getId());
 		System.out.println("deleteById方法結束");
 		if (check==true) {
 			System.out.println("刪除後回傳true");
