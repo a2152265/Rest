@@ -14,4 +14,5 @@ public interface BookDao {
     public boolean deleteById(int id);
     public List<Book> deleteByName(String name);
     public boolean checkName(String name);
+    public Book selectById(int bookid);
 }

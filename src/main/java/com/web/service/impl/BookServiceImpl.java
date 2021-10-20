@@ -68,6 +68,12 @@ public class BookServiceImpl implements BookService{
 		// TODO Auto-generated method stub
 		return bookdao.checkName(name);
 	}
+
+	@Override
+	public Book selectById(int bookid) {
+		
+		return bookdao.selectById(bookid);
+	}
 	
 
 }

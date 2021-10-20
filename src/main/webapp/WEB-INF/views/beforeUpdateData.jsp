@@ -1,6 +1,6 @@
-<%@page import="HibernateHW.model.Book"%>
 <%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,31 +115,29 @@ a.button2:hover {
 
 <body>
 
-<% 
-   Book b=(Book)session.getAttribute("update");
- %>
+
  <h1 class="p">書籍資訊</h1>
 
- <form action="./HibernateServletAction.do" method="post">
+ <form:form id="form">
  <table >
  <tr>
  	<td width="20%">書籍代號<br>(不得修改)</td>
  	<td width="80%">
- 	<input style="color:gray;" type="text" name="bookId" id="" value="<%=b.getId() %>"  disabled>
+ 	<form:input style="color:gray;" type="text" id="id" path="id"  disabled="true"/>
  	</td> 
  	
  </tr>
   <tr>
  	<td>書籍名稱</td>
  	<td>
- 	<input type="text" name="bookname" id="" value="<%=b.getBookname() %>">
+ 		<form:input style="color:gray;" type="text" id="bookname" path="bookname" />
  	</td> 
  </tr>
  
   <tr>
   <td>書籍價錢</td>
   <td>
-  <input type="text" name="price" id="" value="<%=b.getPrice() %>">
+  	<form:input style="color:gray;" type="text" id="price" path="price" />
   </td> 
    </tr>
    
@@ -147,14 +145,14 @@ a.button2:hover {
    <tr>
    <td>書籍作者</td>
    <td>
-   <input type="text" name="author" id="" value="<%=b.getAuthor() %>">
+   	<form:input style="color:gray;" type="text" id="author" path="author" />
    </td> 
    </tr>
    
    
  </table>
-       <a><button name="update2" id="submit" type="submit" class="button">送出</button></a>
- </form>
+       <a><button id="submit" type="submit" class="button">送出</button></a>
+ </form:form>
  	   	<a href="home.jsp"><button  name="return" id="return" class="button">回首頁</button></a>
 
 
@@ -164,17 +162,28 @@ a.button2:hover {
   
 <script>
 
-$("#submit").click(function(){
+var $form=$('#form');
 
-	$("input").prop("disabled",false);
+$form.on('submit',function(e)){
+	
+$.ajax({
+  type: "POST",
+  url: './updateForm',
+  data: $form.serialize(),
+  success: function (data) {
+ 	  Swal.fire({
+		  
+	  })
+     
+  },
+  error:: function (result){
+	  Swal.fire({
+		  
+	  })
+  }
+})
+}
 
-	});
-
-$("#return").click(function(){
-
-	$(location).attr('href', 'update.jsp');
-
-});
 
 
 </script>

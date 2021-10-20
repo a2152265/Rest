@@ -1,27 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>修改 | ID修改</title>
+<title>查詢 | 書名查詢</title>
 <style>
-
-.byline p {
-	text-align: center;
-	color: #c6c6c6;
-	font: bold 18px Arial, Helvetica, Sans-serif;
-	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-}
-
-.byline p a {
-	color: #d83c3c;
-	text-decoration: none;
-}
-
-
-
-
 body {
 	font-size: 20px;
 	font-weight: 500;
@@ -52,23 +37,23 @@ input, textarea, select {
 	background-color: rgb(203, 218, 218, 0.2);
 }
 
-form {
-	background-color: rgb(255, 255, 255, 0.8);
-	margin: 20px auto;
-	max-width: 820px;
-	padding: 80px;
-	/* border-radius: 20px; */
-	box-shadow: 0 10px 10px 0 rgba(177, 175, 175, 0.2);
-}
+/* form { */
+/* 	background-color: rgb(255, 255, 255, 0.8); */
+/* 	margin: 20px auto; */
+/* 	max-width: 820px; */
+/* 	padding: 80px; */
+/* 	/* border-radius: 20px; */ */
+/* 	box-shadow: 0 10px 10px 0 rgba(177, 175, 175, 0.2); */
+/* } */
 
-.form-group__file {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	width: 100%;
-	min-width: 130px;
-	height: 180px;
-}
+/* .form-group__file { */
+/* 	display: flex; */
+/* 	flex-direction: column; */
+/* 	position: relative; */
+/* 	width: 100%; */
+/* 	min-width: 130px; */
+/* 	height: 180px; */
+/* } */
 
 .file-label {
 	margin: 10px 0;
@@ -133,6 +118,11 @@ h1 {
 }
 
 a {
+	-webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
 	display: block;
 	margin: 40px auto;
 	max-width: 180px;
@@ -141,6 +131,25 @@ a {
 	padding: 20px 30px;
 }
 
+a.button {
+	color: rgba(30, 22, 54, 0.6);
+	box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+a.button:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+}
+
+a.button2 {
+	color: rgba(30, 22, 54, 0.6);
+	box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+a.button2:hover {
+	color: rgba(255, 255, 255, 0.85);
+	box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+}
 
 table {
 	border-collapse: collapse;
@@ -177,7 +186,7 @@ th {
 	vertical-align: middle;
 } */
 table tbody input {
-	width: 20px;
+	width: 100px;
 	text-align: center;
 }
 
@@ -210,57 +219,89 @@ table tbody input {
         }
 
 
-.input {
+input {
 	width: 300px;
 	height: 25px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('#send').click(function(){
+			$('#row').html('');
+			$.ajax({
+				url:'update',
+				type:'get',
+				contentType: "application/json; charset=utf-8",
+				data:{"id":$('#id').val()},
+				success:function(data){
+					console.log(data);
+					$('#row').append(
+							"<td>"+"<input name='id1' id='id1' type='text' value="+data.id+" readonly='readonly'></td>"+
+							"<td>"+"<input name='name' id='name' type='text' value="+data.bookname+"></td>"+
+							"<td>"+"<input name='author' id='author' type='text' value="+data.author+"></td>"+
+							"<td>"+"<input name='price' id='price' type='number' value="+data.price+"></td>"
+					
+							
+					)
+			
+				},
+			})
+		});
+		
+		$('#submit').click(function(){
+			$.ajax({
+				url:'updateForm',
+				type:'post',
+				contentType: "application/json; charset=utf-8",
+				data:{"id":$('#id').val(),
+					"name":$('#name').val(),
+					"author":$('#author').val(),
+					"price":$('#price').val(),	
+				},
+				success:function(data){
+					if(data==Y){
+						console.log("修改成功");
+					}if(data==N){
+						console.log("失敗");
+					}
+				
+				},
+			})
+			
+		})
+		
+	});
+</script>
 </head>
 <body>
-<!--  
-	<form action="./HibernateServletAction.do" class="form-wrapper cf"
-		method="post" id="form">
-
-
-		<input name="updateid" id="updateid" type="number" placeholder="請輸入書籍代碼"
-			required>
-		<button name="update" id="update" type="submit">送出</button>
-
-	</form>
-	-->
-	
-	 <div class="leftSide">
-  	<h1 class="p">修改商品</h1>
+ <div class="leftSide">
+  <h1 class="p">查詢商品</h1>
  
-	<form action="./HibernateServletAction.do" method="post">
-		<center>
-			<label>書名ID</label> <input name="updateid" id="updateid" type="number""  placeholder="請輸入書籍代碼" class="input" required>
+<!-- 	<form method=get> -->
+		<div>
+			<label>書名關鍵字</label> 
+			<input id="id" type="number" name="id" class="input">
+			<button id="send" name="select">送出</button>
+		</div>
+<!-- 	</form> -->
+		<form id="form" class="container" method="post">
 
-			<button type="submit" name="update">送出</button>
-
-		</center>
-
-	</form>
-
-	<a href="home.jsp"><button class="button">回首頁</button></a>
-
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script>
-
+			<table border=1>
+				<tr>
+					<th>編號</th><th>書名</th><th>作者</th><th>價錢</th>
+				</tr>
+				<tbody>
+				<tr id="row">
+					
+				</tr>
+				</tbody>
+			</table>
+			<button style='margin-left:800px' type='submit' class='button'>修改資料</button>
+			
+		</form>
+</div>
 	
-	$(document).ready(function(){
-		$("#update").click(function(){
-			if($("#updateid").val()==""){
-				alert("請填寫代碼");
-				eval("document.form['updateid'].focus()");  
-				}else{
-				document.form.submit();
-				}
-		})
-
-		})
-	
-	</script>
-
 </body>
 </html>

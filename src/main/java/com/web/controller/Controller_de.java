@@ -29,12 +29,7 @@ public class Controller_de {
 		this.bookservice = bookservice;
 	}
 	
-	
-	
-	
-	
-	
-	
+
 	
 	@GetMapping("/deleteByName")
 	public String deleteByname(Model model) {

@@ -9,10 +9,12 @@ public interface BookService {
 
 	public Book insert(Book book);
 	public List<Book> selectLikeName(String name);
+	
 	public List<Book> selectAll();
     public Book update(Book book);
     public boolean deleteById(int bookid);
     public List<Book> deleteByName(String name);
     public boolean checkName(String name);
+    public Book selectById(int bookid);
 	
 }
