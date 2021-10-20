@@ -100,7 +100,25 @@ a {
     align-items: center; 
         }
 </style>
-<script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script type="text/javascript"> 
+ $(document).ready(function(){
+     $('#insert').click(function(e){
+         e.preventDefault();
+ //         var formData=new FormData(form);
+         $.ajax({
+             url:'insert.controller',
+             type:'post',
+             data:$('#form1').serialize(),
+             success:function(data){
+                 setTimeout("location.href='insertsuccess'",0)
+
+            }
+         })
+     })
+ })
+</script> 
+<!--<script type="text/javascript">
    window.onload = function(){
        var form = document.getElementById('form1');
        var insert = document.getElementById('insert');
@@ -112,10 +130,10 @@ a {
            xh.open('post','insert.controller');
            xh.send(formData);
            setTimeout("location.href='insertsuccess'",0)
-       
+
        });
    }
-</script>
+</script>-->
 </head>
 <body>
 
@@ -155,8 +173,10 @@ a {
 				<button type="submit" name="insert" id="insert" class="button">確認送出</button>
 
 			</div>
+			</form>
+		
 
-		</form>
+		
 
 			<div class=div>
 			
