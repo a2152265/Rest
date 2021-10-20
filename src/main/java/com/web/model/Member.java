@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name="member")
 public class Member {
@@ -39,6 +41,17 @@ public class Member {
 	public Member(String account, String password) {
 		
 	}
+	
+	
+	public Member(String username, String account, String password, String emailAddress, String phone) {
+		super();
+		this.username = username;
+		this.account = account;
+		this.password = password;
+		this.emailAddress = emailAddress;
+		this.phone = phone;
+	}
+
 	public Member( String username, String account, String password, String emailAddress, String phone,
 			String status) {
 		super();

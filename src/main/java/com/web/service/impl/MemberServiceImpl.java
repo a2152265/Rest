@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.web.dao.MemberDao;
 import com.web.dao.impl.MemberDaoImpl;
 import com.web.model.Member;
 import com.web.service.MemberService;
@@ -14,16 +15,13 @@ import com.web.service.MemberService;
 @Service
 public class MemberServiceImpl implements MemberService{
 	
-	MemberDaoImpl memberdao;
-
-	public MemberServiceImpl() {
-	}
-
+	MemberDao memberdao;
+	
 	@Autowired
-	public MemberServiceImpl( MemberDaoImpl memberdao) {
+	public MemberServiceImpl(MemberDao memberdao) {
 		this.memberdao = memberdao;
 	}
-	
+
 
 	@Override
 	public Member insert(Member mBean) {
@@ -57,12 +55,22 @@ public class MemberServiceImpl implements MemberService{
 		return memberdao.deleteById(id);
 	}
 
+//	@Override
+//	public boolean checkUser(String account, String password) {
+//		// TODO Auto-generated method stub
+//		return memberdao.checkUser(account, password);
+//	}
+
 	@Override
-	public boolean checkUser(String account, String password) {
-		// TODO Auto-generated method stub
-		return memberdao.checkUser(account, password);
+	public boolean checkLogin(Member member) {
+		
+		return memberdao.checkLogin(member);
 	}
 	
-	
+	@Override
+	public boolean checkUser(Member member) {
+		// TODO Auto-generated method stub
+		return memberdao.checkUser(member);
+	}
 
 }

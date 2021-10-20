@@ -35,10 +35,10 @@
         title: '註冊成功',
         // text: '即將跳轉至首頁',
         showConfirmButton: false,
-        timer: 3000
+        timer: 2000
         })
      
-		setTimeout("location.href='login.jsp'",3000)
+		setTimeout("location.href='home'",2000)
     </script>
 </body>
 </html>

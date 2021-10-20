@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.dao.MemberDao;
 import com.web.model.Member;
@@ -26,16 +27,16 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Member insert(Member member) {
 		Session session = factory.getCurrentSession();
-		Member mBean = new Member();
-		mBean.setUsername(member.getUsername());
-		mBean.setAccount(member.getAccount());
-		mBean.setPassword(member.getPassword());
-		mBean.setEmailAddress(member.getEmailAddress());
-		mBean.setPhone(member.getPhone());
-		mBean.setStatus(member.getStatus());
-		session.save(mBean);
+//		Member mBean = new Member();
+//		mBean.setUsername(member.getUsername());
+//		mBean.setAccount(member.getAccount());
+//		mBean.setPassword(member.getPassword());
+//		mBean.setEmailAddress(member.getEmailAddress());
+//		mBean.setPhone(member.getPhone());
+//		mBean.setStatus(member.getStatus());
+		session.save(member);
 //		session.getTransaction().commit();
-		return mBean;
+		return member;
 	}
 
 	@Override
@@ -83,17 +84,48 @@ public class MemberDaoImpl implements MemberDao {
 		
 	}
 
+//	@Override
+//	public boolean checkUser(String account, String password) {
+//		Session session = factory.getCurrentSession();
+//		Query<Member> query=session.createQuery("from Member where account=:account and password=:password",Member.class);
+//		query.setParameter("account", account);
+//		query.setParameter("password", password);
+//		Member resultBean =query.uniqueResult();
+//		if(resultBean!=null) {
+//			return true;
+//		}
+//		return false;
+//	}
+	
 	@Override
-	public boolean checkUser(String account, String password) {
+	public boolean checkUser(Member member) {
 		Session session = factory.getCurrentSession();
 		Query<Member> query=session.createQuery("from Member where account=:account and password=:password",Member.class);
-		query.setParameter("account", account);
-		query.setParameter("password", password);
+		query.setParameter("account", member.getAccount());
+		query.setParameter("password", member.getPassword());
+		System.out.println(member.getAccount());
+		System.out.println(member.getPassword());
 		Member resultBean =query.uniqueResult();
 		if(resultBean!=null) {
 			return true;
 		}
 		return false;
 	}
-
+	@Override
+	public boolean checkLogin(Member member) {
+		Session session = factory.getCurrentSession();
+		
+		String hql = "from Member where account=:account";
+		Query<Member> query = session.createQuery(hql, Member.class);
+		query.setParameter("account", member.getAccount());
+		System.out.println(member.getAccount());
+		Member resultBean = query.uniqueResult();
+	
+		
+		if(resultBean!=null) {
+			return true;
+		}
+		
+		return false;		
+	}
 }

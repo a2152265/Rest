@@ -86,7 +86,7 @@
 
 
 
-					<form id="form" action="./RegisterServletAction.do" method="post">
+					<form id="form" method="post" >
 					
 						
 						
@@ -99,7 +99,7 @@
 						
 						<div  class="form-group row">
 						  <label  class="labelmg" for="account">帳號:</label>
-						  <input class="form-control form-control-sm col-sm-5 ml-2" type="text"placeholder="請輸入6-15位英數字混和" maxlength="15"id="account" name="account" onkeyup="value=value.replace(/[\W]/g,'') "></input>
+						  <input class="form-control form-control-sm col-sm-5 ml-2" type="text"placeholder="請輸入6-15位英數字混和" maxlength="15"id="account" name="account" onkeyup="value=value.replace(/[\W]/g,'') "></input><span id="accountsp" style="margin-top:4px;font-size:15px;font-weight:bolder"></span>
 						</div>
 						<div  class="form-group row">
 							<label  class="labelmg" for="password1">密碼:</label>
@@ -119,7 +119,7 @@
 							<input class="form-control form-control-sm col-sm-5 ml-2" type="text" id="phone" name="phone" maxlength="10" onkeyup="value=value.replace(/[^\d]/g,'')"></input>
 						  </div>
 						  <div style="width:200px;margin-left:200px;">
-							<button type="submit"  class="button ">送出</button>
+							<button class="button" id="submit">送出</button>
 						  </div>
 						</div>
 			
@@ -131,10 +131,112 @@
 			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+		
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			
 		<Script>
-			
+		
+		$(document).ready(function(){
+		       $("#account").change(function(){
+		            var username = $("#account").val();
+
+		            var params = {"account":''+ username};
+
+		            $.ajax({
+		                type:'post',
+		                url:'register1',
+		                contentType:'application/json',
+		                data: JSON.stringify(params),
+		                success: function(data){
+		                    console.log("Success:" + data);
+		                    if(data=='Y'){
+//  		                    	 alert('帳號已重複');
+ 		                    	$("#submit").attr("disabled",true)
+		                        $("#accountsp").html("<i class='fas fa-times-circle' style='color:red'>帳號重複!</i>");
+		                        $("#account").focus().css("background-color","#FFFFCC").css("border","3px solid lightblue");
+								
+// 		                         Swal.fire({
+// 		                             position: 'center',
+// 		                             icon: 'error',
+// 		                             title: 'Oops...',
+// 		                             text: '帳號重複',
+// 		                             showConfirmButton: false,
+// 		                             timer: 2000
+// 		                             })
+//		                         $("#submit").attr("disabled",true);
+		                    }
+
+		                    if(data=='N'){
+		                    	$("#accountsp").html('');
+		                        $("#account").focus().css("background-color","white");
+		                    	$("#submit").attr("disabled",false)
+		                    	
+		                    }
+		                },
+		                error: function(e){
+		                    console.log(e);
+		                }
+		            });
+		       });
+		   });
+		
+		
 		 $(function(){
+// 			 	jQuery.validator.addMethod("checkaccount", function(value, element) {
+// 			 		var flag = 1;
+ 			   
+// 		            var username = $("#account").val();
+
+// 		            var params = {"account":''+ username};
+
+// 		            $.ajax({
+// 		            	type:"POST",
+// 		            	url:'register',
+// 		            	contentType:'application/json',
+// 		            	data:{'account':value},
+// 		            	success: function(data){
+// 		            	if(data == 'Y'){
+// 		            	flag = 0;
+// 		            	}
+// 		            	}
+// 		            	});
+// 		            	if(flag == 0){
+// 		            	return false;
+// 		            	}else{
+// 		            	return true;
+// 		            	}
+// 		            	}, "sorry number have been exist");
+		            
+// 		            $.ajax({
+// 		                type:'post',
+// 		                url:'register',
+// 		                contentType:'application/json',
+// 		                data: JSON.stringify(params),
+// 		                success: function(data){
+// 		                    console.log("Success:" + data);
+// 		                    if(data=='Y'){
+// // 		                    	 alert('帳號已重複');
+// // 		                         $("#accountsp").html('account already exists');  
+// // 		                         $("#account").focus().css("background-color","#FFFFCC").css("border","3px solid lightblue");
+// 		                    	 flag = 0; 
+// 		                    }
+
+// 		                    if(data=='N'){
+// // 		                    	$("#accountsp").html('');
+// 		                    	 flag = 1; 
+// 		                    }
+// 		                    if(flag==0){
+// 		                    	return false;
+// 		                    }else{
+// 		                    	return true;
+// 		                    }
+// 		                }
+// 		            });
+
+//  				}, "帳號重複。"); 
+			 
+			 
 				jQuery.validator.addMethod("isChinese", function(value, element) {
 					var reg=/^[\u4e00-\u9fa5]+$/;       
     			     return this.optional(element) || reg.test(value);       
@@ -218,6 +320,7 @@
 			 minlength: 6,
 			 maxlength:15,
 			 checkpwdhard:true
+// 			 ,checkaccount:true
           },
 		  password1: {
             required: true,
@@ -250,6 +353,8 @@
             required:"<i class='fas fa-times-circle' style='color:red'>必填!</i>",
 			 minlength:"<i class='fas fa-times-circle' style='color:red'>至少六個字!</i>",
 			 checkpwdhard:"<i class='fas fa-times-circle' style='color:red'>必須為英數字</i>"
+// 			 ,checkaccount:"<i class='fas fa-times-circle' style='color:red'>帳號重複</i>"
+			 
           }, 
 		  	password1: {
             required:"<i class='fas fa-times-circle' style='color:red'>必填!</i>",
@@ -271,16 +376,15 @@
             required:"<i class='fas fa-times-circle' style='color:red'>必填!</i>",
             email:"<i class='fas fa-times-circle' style='color:red'>Email格式不正確!</i>"
           },
-          
         },
         submitHandler: function(form) {
+         
+
           form.submit();
         }
   });
-
-
 });
-
+	
 
 
 
