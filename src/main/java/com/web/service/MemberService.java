@@ -11,6 +11,8 @@ public interface MemberService {
 	public List<Member> selectAll();
     public Member update(int userid, String username);
     public boolean deleteById(int id);
-    public boolean  checkUser(String account,String password);
+//    public boolean  checkUser(String account,String password);
+    public boolean checkLogin(Member member);
+    public boolean checkUser(Member member);
 
 }

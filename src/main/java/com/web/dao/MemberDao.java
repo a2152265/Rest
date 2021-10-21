@@ -11,5 +11,7 @@ public interface MemberDao {
 	public List<Member> selectAll();
     public Member update(int userid, String username);
     public boolean deleteById(int userid);
-    public boolean  checkUser(String account,String password);
+//    public boolean  checkUser(String account,String password);
+    public boolean  checkUser(Member member);
+    public boolean checkLogin(Member member);
 }

@@ -199,7 +199,7 @@ body {
 		<ul class="dropdown">
 
 
-			<li><a href="./LogoutServletAction.do">會員登出</a></li>
+			<li><a href="<c:url value='/logut' />">會員登出</a></li>
 
 		</ul>
 	</nav>
