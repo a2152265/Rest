@@ -160,7 +160,7 @@ input[type="submit"]:active {
 
   
   
-  <a class="register" href="<c:url value='/register' />">Register</a>
+  <a class="register" href="<c:url value='/register' />">註冊</a>
 
    <input type="submit"  id="login" name="submit" value="登入" />
 <!-- <button type="submit" id="login" value="" class="button">登入</button> -->

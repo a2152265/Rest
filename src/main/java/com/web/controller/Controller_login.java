@@ -74,8 +74,8 @@ public class Controller_login {
 				@RequestParam("phone") String phone
 				
 				) {
-			
-			Member member = new Member(username,account,password,emailAddress,phone);
+			String status = "一般會員";
+			Member member = new Member(username,account,password,emailAddress,phone,status);
 			 memberService.insert(member);
 			return "redirect:/registersuccess";
 		}
