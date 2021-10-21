@@ -14,5 +14,5 @@ public interface BookService {
     public boolean deleteById(int bookid);
     public List<Book> deleteByName(String name);
     public boolean checkName(String name);
-	
+    public Book selectById(int bookid);
 }

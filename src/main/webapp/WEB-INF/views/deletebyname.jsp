@@ -31,7 +31,7 @@ h1 {
  width: 300px;
 }
 
-form {
+.div {
  background-color: rgb(255, 255, 255, 0.8);
  margin: 20px auto;
  max-width: 600px;
@@ -87,11 +87,11 @@ input, textarea, select {
             color: #fff;
             transform: translateY(-7px);
         }
-        .div{
-          display: flex;
-  		  justify-content: center; 
-    	  align-items: center; 
-        }
+         .div1{ 
+           display: flex; 
+   		  justify-content: center;  
+     	  align-items: center;  
+         } 
 </style>
 
 
@@ -104,7 +104,7 @@ input, textarea, select {
             var bookname = $("#book").val();  //抓到帳號的值
 
             if($.trim(bookname)==''){
-                alert('Account is Empty');
+                alert('請輸入書名');
                 return;
             }
 
@@ -118,11 +118,11 @@ input, textarea, select {
                 success: function(data){
                     console.log("Success:" + data);    //成功的話 回傳的data
                     if(data=='Y'){
-                       $("#result").html('帳號存在 並已刪除');
+                       $("#result").html('資料已刪除');
                     }
 
                     if(data=='N'){
-                        $("#result").html('帳號不存在');
+                        $("#result").html('資料不存在');
                     }
                 },
                 error: function(e){
@@ -147,18 +147,18 @@ input, textarea, select {
  </div>
 <br><br><br><br><br>
  <div>
-   <form:form method='POST' modelAttribute="bookData"
-			class='form-horizontal' enctype="multipart/form-data">
+   <div class="div">
    <table rules="all">
        <h4 style="font-size: 20px;">輸入書名刪除資料</h4>
     <tr>
 
      <td>
-     	<form:input id="bookname" path="bookname" type='text'
-							class='inputClass' />
+
+	書名:  <input id="book" type="text" name="book" class='inputClass'/>
+      <div id="result" name="result" style="margin:10px"></div>
 
         <div class="wrap">
-            <button type="submit" name="deleteByName" class="button">使用書名刪除</button>
+            <button id="send" class="button">刪除</button>
         </div>
     
     </td>
@@ -172,22 +172,14 @@ input, textarea, select {
    </div>
 	
 
-  </form:form>
-  
-  <div>
-  	Account:<input id="book" type="text" name="book"/>
-      <label id="result" name="result"></label>
-      <button id="send">檢查帳號send 如果存在即刪除</button>
   </div>
   
+ 
   
   
   
-  
-  
-  
-  <div class=div>
-    <a href="/Rest"><button class="button" >回首頁</button></a>
+  <div class=div1>
+    <a href="home"><button class="button" >回首頁</button></a>
     </div>
  </div>
 

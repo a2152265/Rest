@@ -23,7 +23,7 @@
                 timer: 2000
                 })
 
-                setTimeout("location.href='/Rest'",1000)
+                setTimeout("location.href='home'",1000)
 
     </script>
 

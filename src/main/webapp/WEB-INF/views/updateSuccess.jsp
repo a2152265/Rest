@@ -21,7 +21,7 @@
 		})
 
 		window.setTimeout(function() {
-			location.href = "./home.jsp";
+			location.href = "home";
 		}, 1000);
 	</script>
 

@@ -66,21 +66,11 @@ public class BookDaoImpl implements BookDao {
 	public Book update(Book book) {
 		
 		Session session = factory.getCurrentSession();
-		String hql="update Book set bookname=:bname,author=:bauthor,price=:bprice where id=:bid";
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!"+book);
+		session.saveOrUpdate(book);
+		
+		return book;
 
-		Query<?> query = session.createQuery(hql);
-		query.setParameter("bname", book.getBookname());
-		query.setParameter("bauthor", book.getAuthor());
-		query.setParameter("bprice", book.getPrice());
-		query.setParameter("bid", book.getId());
-		
-		int count = query.executeUpdate();
-		if(count>0) {
-			return book;
-		}
-			return null;
-		
-		
 	}
 
 	@Override

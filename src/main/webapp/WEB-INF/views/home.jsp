@@ -233,7 +233,7 @@ body {
     </ul>
   </li>
   <li>
-    <a href=".\update.jsp">
+    <a href="<c:url value='/getupdate' />">
       修改
     </a>
   </li>

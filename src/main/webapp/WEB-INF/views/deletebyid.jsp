@@ -139,7 +139,7 @@ input, textarea, select {
   
   
     <div class=div>
-    <a href="/Rest"><button class="button" >回首頁</button></a>
+    <a href="home"><button class="button" >回首頁</button></a>
     </div>
  </div>
 

@@ -273,6 +273,6 @@ table tbody input {
 		</div>
 </div>
 
-	<a href="<c:url value='/' />"><button class="button">回首頁</button></a>
+	<a href="<c:url value='home' />"><button class="button">回首頁</button></a>
 </body>
 </html>
