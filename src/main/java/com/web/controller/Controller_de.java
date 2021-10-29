@@ -38,6 +38,7 @@ public class Controller_de {
 	
 	@GetMapping("/deleteByName")
 	public String deleteByname(Model model) {
+		System.out.println("---------------------");
 		Book book =new Book();
 		model.addAttribute("bookData",new Book());
 		return "deletebyname";
@@ -71,6 +72,7 @@ public class Controller_de {
 		if(status==true) {
 			
 			bookservice.deleteByName(book.getBookname());
+			System.out.println("成功check bookname 並刪除xxxxxxxxxxxxxxxxxxxxxxxxxx");
 			System.out.println("成功check bookname 並刪除xxxxxxxxxxxxxxxxxxxxxxxxxx");
 			return new ResponseEntity<String>("Y", HttpStatus.OK);
 		}
