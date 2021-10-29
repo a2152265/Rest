@@ -30,7 +30,7 @@ public class RootAppConfig {
 	            e.printStackTrace();
 	        }
 
-	        ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=Hibernate");
+	        ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=HibernateClass");
 //	        ds.setJdbcUrl("jdbc:sqlserver://MSI\\SQLEXPRESS:1433;databaseName=BuyBuyLa");
 	        ds.setInitialPoolSize(4);
 	        ds.setMaxPoolSize(8);

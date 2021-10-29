@@ -17,7 +17,8 @@ import com.web.service.MemberService;
 
 @Controller
 public class Controller_de {
-
+	//haha tree la
+		//hahahaha2
 	public Controller_de() {	
 	}
 	
@@ -39,6 +40,7 @@ public class Controller_de {
 	@GetMapping("/deleteByName")
 	public String deleteByname(Model model) {
 		Book book =new Book();
+		System.out.println("haha3sSSSSSSSSSSSssssSSSSSSSSSSSSSSSSsssSSSSSS");
 		model.addAttribute("bookData",new Book());
 		return "deletebyname";
 	}
